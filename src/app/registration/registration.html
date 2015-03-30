@@ -1,0 +1,69 @@
+<div layout-fill>
+
+  <header ng-include="'components/navbar/navbar.html'"></header>
+
+
+  <md-content>
+      <div layout="row" layout-margin layout-lg="column" layout-align="center center"
+           ng-controller="RegistrationCtrl as registration">
+          <div flex>
+              <md-toolbar class="md-primary">
+                  <h1 class="md-toolbar-tools">
+                      Registration {{ registration.message }}
+                  </h1>
+              </md-toolbar>
+              <md-content class="md-padding">
+                  <form name="registrationForm" novalidate ng-submit="registration.submit(registrationForm.$error)">
+                      <md-input-container>
+                          <label>Login</label>
+                          <input name="username" type="text" ng-minlength="3"
+                                 ng-model="registration.user.username"
+                                 placeholder="Login">
+                          <div ng-messages="registrationForm.username.$error">
+                              <div ng-message="minlength">Must be a long of more 3 characters.</div>
+                          </div>
+                      </md-input-container>
+                      <md-input-container>
+                          <label>Password</label>
+                          <input name="password" type="password" ng-minlength="8" password-strength
+                                 ng-model="registration.user.password"
+                                 placeholder="Password">
+                          <div ng-messages="registrationForm.password.$error">
+                              <div ng-message="minlength">Must be a long of more 8 characters.</div>
+                              <div ng-message="strongPass">Password must contain at least one special character and one
+                                  uppercase character. Special character should not be first.</div>
+                          </div>
+                      </md-input-container>
+                      <md-input-container>
+                          <label>Confirm Password</label>
+                          <input name="confirmPassword" type="password" ng-model="registration.user.confirmPassword"
+                                 placeholder="Confirm Password" compare-password="registration.user.password">
+                          <div ng-messages="registrationForm.confirmPassword.$error">
+                              <div ng-message="comparePassword">Must match the previous entry.</div>
+                          </div>
+                      </md-input-container>
+                      <md-input-container>
+                          <label>Email</label>
+                          <input name="email" type="email" ng-model="registration.user.email"
+                                 email-validator placeholder="Email">
+                          <div ng-messages="registrationForm.email.$error">
+                              <div ng-message="emailValid">Enter a valid email.</div>
+                          </div>
+                      </md-input-container>
+                      <md-input-container>
+                          <md-button class="md-raised md-button md-default-theme" type="submit">Registration</md-button>
+                      </md-input-container>
+                  </form>
+              </md-content>
+          </div>
+      </div>
+  </md-content>
+
+
+  <footer>
+    <md-toolbar layout="row" layout-align="center center">
+      <p>With ♥ from <a href="https://twitter.com/Swiip">@Swiip</a></p>
+    </md-toolbar>
+  </footer>
+
+</div>
